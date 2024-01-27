@@ -105,7 +105,7 @@ public class GameController : MonoBehaviour
         this.round = this.round + 1;
         Debug.Log("this.round" + this.round + this.maxRound);
         this.scoreText.text = "" + (this.currentScore / this.round);
-        if ((this.currentScore / this.round) < response.score) {
+        if ((this.currentScore / this.round) >= response.score) {
             this.GoodAIResponse();
         } else {
             this.BadAIResponse();
@@ -121,6 +121,14 @@ public class GameController : MonoBehaviour
 
     void closeCurtains() {
         curtainAnimator.closeCurtains();
+    }
+
+    public void callOpenAIResponse() {
+        OpenAiResponse res = new OpenAiResponse();
+        res.score = 7;
+        res.feeling = "Glücklich";
+        res.sentences = new string[] {"WAS?", "Diggi"};
+        this.OpenAIResponse(res);
     }
 
     public async void GoodAIResponse() {
