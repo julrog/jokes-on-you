@@ -18,7 +18,9 @@ public class GameController : MonoBehaviour
     public int maxRound;
     public int currentScore;
 
+    public TMP_Text roundText;
     public TMP_Text scoreText;
+    public TMP_Text feelingText;
 
     public bool canTalk = false;
 
@@ -105,15 +107,20 @@ public class GameController : MonoBehaviour
         this.round = this.round + 1;
         Debug.Log("this.round" + this.round + this.maxRound);
         this.scoreText.text = "" + (this.currentScore / this.round);
+        this.roundText.text = "" + (this.currentScore / this.round);
+        this.feelingText.text = "Aliens sind: " + response.feeling;
+        
+        this.DisplayComments(response.sentences);
+
         if ((this.currentScore / this.round) >= response.score) {
-            this.GoodAIResponse();
+            this.GoodAIResponse(response.sentences);
         } else {
             this.BadAIResponse();
         }
 
         gameStruct.selectNewGameCriteria();
 
-        if (this.round >= this.maxRound) {
+        if (this.round > this.maxRound) {
             Debug.Log("Close and finish");
             Invoke("closeCurtains", 5f);
         }
@@ -131,7 +138,20 @@ public class GameController : MonoBehaviour
         this.OpenAIResponse(res);
     }
 
-    public async void GoodAIResponse() {
+    async void DisplayComments(string[] msges) {
+        string txtToDisplay = msges[Random.Range(0, msges.Length - 1)];
+        var aliensNotOnStage = this.aliens.Where(alienController => alienController.onStage);
+        if (aliensNotOnStage.Any()) {
+            int randomIndex = aliensNotOnStage.Count();
+            for (int i = 0; i < randomIndex; i++) {
+                AlienController alien = aliensNotOnStage.ElementAt(i);
+                string msg = "WHAT?";
+                alien.displayComment(msg);
+            }
+        }
+    }
+
+    public async void GoodAIResponse(string[] msges) {
         Debug.Log("will start good ai respo.");
         var aliensNotOnStage = this.aliens.Where(alienController => !alienController.onStage);
         if (aliensNotOnStage.Any()) {
