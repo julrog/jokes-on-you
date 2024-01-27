@@ -10,7 +10,6 @@ public class CurtainAnimator : MonoBehaviour
     void Start()
     {
         Debug.Log("starts.");
-        LeanTween.move(leftPlane, new Vector3(-6, 0, 10), 5);
         // var leftInitialTween = new PositionTween {
         //     to = new Vector3(-6, 0, 10),
         //     duration = 5,
@@ -38,11 +37,11 @@ public class CurtainAnimator : MonoBehaviour
     }
 
     public void openCurtains() {
-        LeanTween.move(leftPlane, new Vector3(-20, 0, 10), 5);
-        LeanTween.move(rightPlane, new Vector3(20, 0, 10), 5);
+        LeanTween.move(leftPlane, new Vector3(-20, 0, 0), 5);
+        LeanTween.move(rightPlane, new Vector3(20, 0, 0), 5);
     }
     public void closeCurtains() {
-        LeanTween.move(leftPlane, new Vector3(-6, 0, 10), 5);
-        LeanTween.move(rightPlane, new Vector3(6, 0, 10), 5);
+        LeanTween.move(leftPlane, new Vector3(-6, 0, 0), 5);
+        LeanTween.move(rightPlane, new Vector3(6, 0, 0), 5);
     }
 }

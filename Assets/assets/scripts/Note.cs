@@ -9,11 +9,11 @@ public class Note : MonoBehaviour
     void OnMouseOver()
     {
         //If your mouse hovers over the GameObject with the script attached, output this message
-        Debug.Log("Mouse is over GameObject.");
+        // Debug.Log("Mouse is over GameObject.");
         if (!isOver) {
             isOver = true;
             LeanTween.cancel(currentTweenId);
-            this.currentTweenId = LeanTween.move(this.gameObject, new Vector3(-5, 3, -3), 1).id;
+            this.currentTweenId = LeanTween.move(this.gameObject, new Vector3(-3 , 1, -3), .3f).id;
             // LeanTween.move(notePlane, new Vector3(-5, 4, -3), 1);
         }
     }
@@ -21,9 +21,9 @@ public class Note : MonoBehaviour
     void OnMouseExit()
     {
         //The mouse is no longer hovering over the GameObject so output this message each frame
-        Debug.Log("Mouse is no longer on GameObject.");
+        // Debug.Log("Mouse is no longer on GameObject.");
         LeanTween.cancel(currentTweenId);
-        this.currentTweenId = LeanTween.move(this.gameObject, new Vector3(-4, -7, -3), 1).id;
+        this.currentTweenId = LeanTween.move(this.gameObject, new Vector3(-3, -7, -3), .3f).id;
         isOver = false;
     }
 }

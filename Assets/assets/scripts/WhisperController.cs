@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using Whisper.Utils;
 
+using TMPro;
+
 namespace Whisper.Samples
 {
     /// <summary>
@@ -11,12 +13,12 @@ namespace Whisper.Samples
     {
         public WhisperManager whisper;
         public MicrophoneRecord microphoneRecord;
+        
     
         [Header("UI")] 
-        public Button button;
-        public Text buttonText;
+        public TMP_Text tmpText;
         public Text text;
-        public ScrollRect scroll;
+        // public ScrollRect scroll;
         private WhisperStream _stream;
 
         private async void Start()
@@ -27,36 +29,24 @@ namespace Whisper.Samples
             _stream.OnSegmentFinished += OnSegmentFinished;
             _stream.OnStreamFinished += OnFinished;
 
-            microphoneRecord.OnRecordStop += OnRecordStop;
-            button.onClick.AddListener(OnButtonPressed);
-        }
+            // microphoneRecord.OnRecordStop += OnRecordStop;
 
-        private void OnButtonPressed()
-        {
             if (!microphoneRecord.IsRecording)
             {
                 _stream.StartStream();
                 microphoneRecord.StartRecord();
             }
-            else
-                microphoneRecord.StopRecord();
-        
-            buttonText.text = microphoneRecord.IsRecording ? "Stop" : "Record";
-        }
-    
-        private void OnRecordStop(AudioChunk recordedAudio)
-        {
-            buttonText.text = "Record";
         }
     
         private void OnResult(string result)
         {
-            text.text = result;
-            UiUtils.ScrollDown(scroll);
+            tmpText.text = result;
+            // UiUtils.ScrollDown(scroll);
         }
         
         private void OnSegmentUpdated(WhisperResult segment)
         {
+            Debug.Log("asd");
             print($"Segment updated: {segment.Result}");
         }
         
