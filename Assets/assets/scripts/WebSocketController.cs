@@ -17,7 +17,7 @@ public class OpenAiResponse
 {
     public int score;
     public string feeling;
-    public string[] messages;
+    public string[] sentences;
 }
 
 [System.Serializable]
@@ -111,7 +111,9 @@ public class WebSocketController : MonoBehaviour
   public async void SendTranscriptionEnd() {
     CriteriaStruct gs = game.gameStruct.currentCrits;
     Debug.Log("GS:" + gs.feeling);
-    await websocket.SendText("{\"status\": \"ANALYZE\"}");
+    string combinedString = string.Join(";", gs.noGos);
+    string combinedString1 = string.Join(";", gs.toUse);
+    await websocket.SendText("{\"status\": \"ANALYZE\", \"feeling\": \""+gs.feeling+"\", \"badwords\": \""+combinedString+"\", \"goodwords\": \""+combinedString1+"\"}");
   }
 
   public async void StartSendTranscription() {
