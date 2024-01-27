@@ -32,6 +32,8 @@ public class GameStruct : MonoBehaviour
 
   public CriteriaStruct[] crits;
 
+  public CriteriaStruct currentCrits;
+
   void Start()
   {
     
@@ -47,6 +49,7 @@ public class GameStruct : MonoBehaviour
       c.feeling = "sad";
       c.noGos = new string[] { "Finger", "Tier", "Löffel", "Tee", "Buchstabe" };
       c.toUse = new string[] {"Autobahn", "Straße", "Hund"};
+      this.currentCrits = c;
       return c;
     }
   }

@@ -32,6 +32,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
         this.startGame();
+        gameStruct.selectNewGameCriteria();
     }
 
     private int count = 0;
@@ -102,12 +103,14 @@ public class GameController : MonoBehaviour
         this.round = this.round + 1;
         Debug.Log("this.round" + this.round + this.maxRound);
         this.currentScore = this.currentScore / this.round;
-        // fill gameStruct
+
         if (this.currentScore < response.score) {
             this.GoodAIResponse();
         } else {
             this.BadAIResponse();
         }
+
+        gameStruct.selectNewGameCriteria();
 
         if (this.round >= this.maxRound) {
             Debug.Log("Close and finish");

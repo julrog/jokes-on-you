@@ -109,6 +109,8 @@ public class WebSocketController : MonoBehaviour
   // }
 
   public async void SendTranscriptionEnd() {
+    CriteriaStruct gs = game.gameStruct.currentCrits;
+    Debug.Log("GS:" + gs.feeling);
     await websocket.SendText("{\"status\": \"ANALYZE\"}");
   }
 
