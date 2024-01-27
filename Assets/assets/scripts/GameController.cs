@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour
 
     public GameStruct gameStruct;
 
-    public int round;
+    public int round = 0;
     public int maxRound;
     public int currentScore;
 
@@ -31,7 +31,7 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // this.startGame();
+        this.startGame();
     }
 
     private int count = 0;
@@ -95,8 +95,28 @@ public class GameController : MonoBehaviour
         this.speechText.text = this.finishedText;
     }
 
-    public void OpenAIResponse() {
-        this.round += 1;
+    public void OpenAIResponse(/*OpenAiResponse response*/) {
+        Debug.Log("incoming api response");
+        OpenAiResponse response = new OpenAiResponse();
+        response.score = 7;
+        this.round = this.round + 1;
+        Debug.Log("this.round" + this.round + this.maxRound);
+        this.currentScore = this.currentScore / this.round;
+        // fill gameStruct
+        if (this.currentScore < response.score) {
+            this.GoodAIResponse();
+        } else {
+            this.BadAIResponse();
+        }
+
+        if (this.round >= this.maxRound) {
+            Debug.Log("Close and finish");
+            Invoke("closeCurtains", 5f);
+        }
+    }
+
+    void closeCurtains() {
+        curtainAnimator.closeCurtains();
     }
 
     public async void GoodAIResponse() {

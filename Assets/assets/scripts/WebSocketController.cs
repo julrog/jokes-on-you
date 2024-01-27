@@ -15,8 +15,9 @@ public class Transcription
 [System.Serializable]
 public class OpenAiResponse
 {
-    // public string current;
-    // public string finished;
+    public int score;
+    public string feeling;
+    public string[] messages;
 }
 
 [System.Serializable]
@@ -66,11 +67,16 @@ public class WebSocketController : MonoBehaviour
       Debug.Log("incoming mesagesiuh" + playerData.transcription);
       // if (playerData.transcription) {
         Transcription trans = playerData.transcription;
+        OpenAiResponse aiRes = playerData.openAiResponse;
         if (trans.finished != "") {
           game.saveToStaticText(trans.finished);
         }
         if (trans.current != "" && this.game.canTalk) {
           game.setSpeechText(trans.current);
+        }
+        if (aiRes.feeling != "") {
+          Debug.Log("OpenAIRes beeing triggered");
+          // game.OpenAIResponse(aiRes);
         }
       // }
     };

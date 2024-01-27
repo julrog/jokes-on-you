@@ -41,7 +41,7 @@ public class CurtainAnimator : MonoBehaviour
         LeanTween.move(rightPlane, new Vector3(20, 0, 0), 5);
     }
     public void closeCurtains() {
-        LeanTween.move(leftPlane, new Vector3(-6, 0, 0), 5);
-        LeanTween.move(rightPlane, new Vector3(6, 0, 0), 5);
+        LeanTween.move(leftPlane, new Vector3(-4, 0, 0), 5);
+        LeanTween.move(rightPlane, new Vector3(4, 0, 0), 5).setOnComplete( ()=> { Application.Quit(); });
     }
 }
