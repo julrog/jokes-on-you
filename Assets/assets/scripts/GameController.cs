@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 using TMPro;
 
 public class GameController : MonoBehaviour
@@ -22,7 +23,7 @@ public class GameController : MonoBehaviour
     public TMP_Text speechText;
     public string finishedText;
 
-    public GameObject[] aliens;
+    public AlienController[] aliens;
     // Start is called before the first frame update
     void Start()
     {
@@ -88,5 +89,25 @@ public class GameController : MonoBehaviour
         Debug.Log("will save finished Text" + text);
         this.finishedText = this.finishedText + text;
         this.speechText.text = this.finishedText;
+    }
+
+    public void OpenAIResponse() {
+        this.round += 1;
+    }
+
+    public void GoodAIResponse() {
+        var aliensNotOnStage = this.aliens.Where(alienController => !alienController.onStage);
+        foreach (var alien in aliensNotOnStage)
+        {
+            alien.moveAlien();
+        }
+    }
+
+    public void BadAIResponse() {
+        var aliensNotOnStage = this.aliens.Where(alienController => alienController.onStage);
+        foreach (var alien in aliensNotOnStage)
+        {
+            alien.alienIdle();
+        }
     }
 }
