@@ -18,6 +18,8 @@ public class GameController : MonoBehaviour
     public int maxRound;
     public int currentScore;
 
+    public TMP_Text scoreText;
+
     public bool canTalk = false;
 
     public int ownTimer = 15;
@@ -96,15 +98,14 @@ public class GameController : MonoBehaviour
         this.speechText.text = this.finishedText;
     }
 
-    public void OpenAIResponse(/*OpenAiResponse response*/) {
+    public void OpenAIResponse(OpenAiResponse response) {
         Debug.Log("incoming api response");
-        OpenAiResponse response = new OpenAiResponse();
-        response.score = 7;
+        // OpenAiResponse response = new OpenAiResponse();
+        this.currentScore += response.score;
         this.round = this.round + 1;
         Debug.Log("this.round" + this.round + this.maxRound);
-        this.currentScore = this.currentScore / this.round;
-
-        if (this.currentScore < response.score) {
+        this.scoreText.text = "" + (this.currentScore / this.round);
+        if ((this.currentScore / this.round) < response.score) {
             this.GoodAIResponse();
         } else {
             this.BadAIResponse();

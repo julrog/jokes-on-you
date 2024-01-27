@@ -75,8 +75,8 @@ public class WebSocketController : MonoBehaviour
           game.setSpeechText(trans.current);
         }
         if (aiRes.feeling != "") {
-          Debug.Log("OpenAIRes beeing triggered");
-          // game.OpenAIResponse(aiRes);
+          Debug.Log("OpenAIRes beeing triggered" + aiRes.feeling);
+          game.OpenAIResponse(aiRes);
         }
       // }
     };
