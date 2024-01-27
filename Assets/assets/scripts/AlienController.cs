@@ -12,8 +12,8 @@ public class AlienController : MonoBehaviour
   public bool onStage = false;
   public void moveAlien()
   {
-    float randomX = Random.Range(-3f, 3f);
-    float randomY = Random.Range(-3f, 3f);
+    float randomX = Random.Range(-8f, 8f);
+    float randomY = Random.Range(-3f, 1f);
     LeanTween.cancel(currentTweenId);
     this.currentTweenId = LeanTween.move(gameObject, new Vector3(randomX , randomY, 8), .3f).setOnComplete( ()=> { this.onStage = true; } ).id;
     // LeanTween.move(notePlane, new Vector3(-5, 4, -3), 1);
