@@ -102,17 +102,23 @@ public class GameController : MonoBehaviour
     public async void GoodAIResponse() {
         Debug.Log("will start good ai respo.");
         var aliensNotOnStage = this.aliens.Where(alienController => !alienController.onStage);
-        foreach (var alien in aliensNotOnStage)
-        {
-            alien.moveAlien();
+        if (aliensNotOnStage.Any()) {
+            int randomIndex = Random.Range(1, aliensNotOnStage.Count());
+            for (int i = 0; i < randomIndex; i++) {
+                AlienController alien = aliensNotOnStage.ElementAt(i);
+                alien.moveAlien();
+            }
         }
     }
 
     public async void BadAIResponse() {
         var aliensNotOnStage = this.aliens.Where(alienController => alienController.onStage);
-        foreach (var alien in aliensNotOnStage)
-        {
-            alien.alienIdle();
+        if (aliensNotOnStage.Any()) {
+            int randomIndex = Random.Range(1, aliensNotOnStage.Count());
+            for (int i = 0; i < randomIndex; i++) {
+                AlienController alien = aliensNotOnStage.ElementAt(i);
+                alien.alienIdle();
+            }
         }
     }
 }

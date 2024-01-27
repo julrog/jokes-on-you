@@ -312,6 +312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f18c0b0d293c74154a618539abbb18ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  materialToColor: {fileID: 2100000, guid: 168d3546dda7347b8a7f3359c1686de5, type: 2}
   alienComment: {fileID: 5259366424212418886}
   alien: {fileID: 0}
   idle: 0

@@ -15,7 +15,7 @@ public class Micro : MonoBehaviour
       if (!isOver) {
         isOver = true;
         LeanTween.cancel(currentTweenId);
-        this.currentTweenId = LeanTween.move(this.gameObject, new Vector3(6 , -1, 8), .3f).setOnComplete( ()=> { Debug.Log("finished"); this.game.canTalk = true; this.micController.openMic(); } ).id;
+        this.currentTweenId = LeanTween.move(this.gameObject, new Vector3(6 , -1, 6), .3f).setOnComplete( ()=> { Debug.Log("finished"); this.game.canTalk = true; this.micController.openMic(); } ).id;
         // LeanTween.move(notePlane, new Vector3(-5, 4, -3), 1);
       }
     }
@@ -25,7 +25,7 @@ public class Micro : MonoBehaviour
         //The mouse is no longer hovering over the GameObject so output this message each frame
         // Debug.Log("Mouse is no longer on GameObject.");
         LeanTween.cancel(currentTweenId);
-        this.currentTweenId = LeanTween.move(this.gameObject, new Vector3(6 , -5, 8), .3f).setOnComplete( ()=> { Debug.Log("finish down"); this.game.canTalk = false; this.game.endRound(); } ).id;
+        this.currentTweenId = LeanTween.move(this.gameObject, new Vector3(6 , -5, 6), .3f).setOnComplete( ()=> { Debug.Log("finish down"); this.game.canTalk = false; this.game.endRound(); } ).id;
         isOver = false;
     }
 }
