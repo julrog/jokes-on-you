@@ -102,6 +102,14 @@ public class WebSocketController : MonoBehaviour
   //   }
   // }
 
+  public async void SendTranscriptionEnd() {
+    await websocket.SendText("{\"status\": \"ANALYZE\"}");
+  }
+
+  public async void StartSendTranscription() {
+    await websocket.SendText("{\"status\": \"TRANSCRIBE\"}");
+  }
+
   private async void OnApplicationQuit()
   {
     await websocket.Close();

@@ -721,7 +721,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   game: {fileID: 1506319625}
-  micController: {fileID: 0}
+  micController: {fileID: 1105483582}
 --- !u!1 &498032457
 GameObject:
   m_ObjectHideFlags: 0
@@ -3721,7 +3721,7 @@ MonoBehaviour:
   maxRound: 0
   currentScore: 0
   canTalk: 0
-  ownTimer: 5
+  ownTimer: 15
   timerText: {fileID: 768434493}
   speechText: {fileID: 255451743}
   finishedText: 
@@ -4596,7 +4596,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1846580029
 MonoBehaviour:
   m_ObjectHideFlags: 0

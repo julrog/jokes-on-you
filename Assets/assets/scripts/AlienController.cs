@@ -34,7 +34,6 @@ public class AlienController : MonoBehaviour
     }
     //The mouse is no longer hovering over the GameObject so output this message each frame
     // Debug.Log("Mouse is no longer on GameObject.");
-    Debug.Log("move to:" +randomX);
     LeanTween.cancel(currentTweenId);
     this.currentTweenId = LeanTween.move(gameObject, new Vector3(randomX , transform.position.y, 8), .3f).setOnComplete( ()=> { this.onStage = false; } ).id;
   }

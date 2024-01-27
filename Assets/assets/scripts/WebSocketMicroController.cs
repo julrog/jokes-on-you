@@ -23,6 +23,8 @@ public class WebSocketMicroController : MonoBehaviour
     }
 
     public void openMic() {
+        Debug.Log("Mic will open");
+        sc.StartSendTranscription();
         // Beginnen Sie mit der Aufnahme vom Mikrofon
         AudioClip microphoneClip = Microphone.Start(null, true, 60, FREQUENCY);
         
@@ -37,6 +39,7 @@ public class WebSocketMicroController : MonoBehaviour
     }
 
     public void closeMic() {
+      sc.SendTranscriptionEnd();
       StopCoroutine(myCoroutine);
       Microphone.End(null);
     }
@@ -73,7 +76,8 @@ public class WebSocketMicroController : MonoBehaviour
             byte[] byteData = ConvertFloatArrayToByteArray(data);
 
             // Hier können Sie den Chunk senden oder anderweitig verwenden
-//            Debug.Log("Sending chunk of size: " + byteData.Length + " bytes");
+           Debug.Log("Sending chunk of size: " + byteData.Length + " bytes");
+            // Debug.Log("send data");
             sc.SendChunk(byteData);
 
             // Aktualisieren Sie die Position für den nächsten Chunk
