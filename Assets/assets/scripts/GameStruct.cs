@@ -67,7 +67,7 @@ public class GameStruct : MonoBehaviour
     if (this.currentCrits.feeling == "Traurig") {
       feeling.text = "Zeit für tränen...";
     }
-    if (this.currentCrits.feeling == "Wütend") {
+    if (this.currentCrits.feeling == "Wuetend") {
       feeling.text = "Richtig Bösartig...";
     }
     if (this.currentCrits.feeling == "Gelangweilt") {

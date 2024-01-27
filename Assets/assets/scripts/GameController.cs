@@ -144,9 +144,13 @@ public class GameController : MonoBehaviour
         if (aliensNotOnStage.Any()) {
             int randomIndex = aliensNotOnStage.Count();
             for (int i = 0; i < randomIndex; i++) {
-                AlienController alien = aliensNotOnStage.ElementAt(i);
-                string msg = "WHAT?";
-                alien.displayComment(msg);
+                int canITellYouSomething = Random.Range(0, 4);
+                if (canITellYouSomething >= 3) {
+                    AlienController alien = aliensNotOnStage.ElementAt(i);
+                    int randomSentence = Random.Range(1, msges.Length);
+                    string msg = msges[randomSentence];
+                    alien.displayComment(msg);
+                }
             }
         }
     }
