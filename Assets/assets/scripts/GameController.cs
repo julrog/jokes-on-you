@@ -107,7 +107,7 @@ public class GameController : MonoBehaviour
         this.round = this.round + 1;
         Debug.Log("this.round" + this.round + this.maxRound);
         this.scoreText.text = "" + (this.currentScore / this.round);
-        this.roundText.text = "" + (this.currentScore / this.round);
+        this.roundText.text = "" + this.round + 1;
         this.feelingText.text = "Aliens sind: " + response.feeling;
         
         this.DisplayComments(response.sentences);
