@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +11,8 @@ public class GameController : MonoBehaviour
     public CurtainAnimator curtainAnimator;
     public WebSocketMicroController micController;
     public GameObject notePlane;
+
+    public GameStruct gameStruct;
 
     public int round;
     public int maxRound;
@@ -95,7 +99,8 @@ public class GameController : MonoBehaviour
         this.round += 1;
     }
 
-    public void GoodAIResponse() {
+    public async void GoodAIResponse() {
+        Debug.Log("will start good ai respo.");
         var aliensNotOnStage = this.aliens.Where(alienController => !alienController.onStage);
         foreach (var alien in aliensNotOnStage)
         {
@@ -103,7 +108,7 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void BadAIResponse() {
+    public async void BadAIResponse() {
         var aliensNotOnStage = this.aliens.Where(alienController => alienController.onStage);
         foreach (var alien in aliensNotOnStage)
         {
