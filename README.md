@@ -15,6 +15,9 @@ Erzähle den Aliens Geschichten und löse verschiedene Emotionen aus, vermeide d
 * You need to have [Docker](https://www.docker.com/) installed.
 * You need to have an [OpenAI-API](https://platform.openai.com/docs/quickstart/step-2-setup-your-api-key) Key
 
+If you dont have a company key try it here:
+[OpenAI-API](https://platform.openai.com/account/organization)
+
 ### Start server
 
 * Clone this repository
@@ -28,7 +31,7 @@ OPENAI_API_ORG=yourorg
 or copy .env.example and rename it to .env and edit the properties in there
 
 * Build and start the container:
-
+* Run the following 2 commands in your Terminal from the root folder of the project
 ```bash
 docker build . -t jokes-on-you -f docker/Dockerfile
 docker run -it --gpus all -p 9000:9000 --env-file .env jokes-on-you:latest 
