@@ -133,7 +133,7 @@ public class GameController : MonoBehaviour
         
         this.scoreText.text = "" + (this.currentScore / this.round);
         this.roundText.text = "" + (this.round + 1);
-        this.feelingText.text = "Aliens sind: " + response.feeling;
+        this.feelingText.text = "Deine Geschichte war:" + response.feeling;
 
         Debug.Log("this.round" + this.round + this.maxRound);
         if (this.round >= this.maxRound && (this.currentScore / this.round >= 7)) {
