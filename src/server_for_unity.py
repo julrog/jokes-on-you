@@ -20,7 +20,7 @@ print('DEVICE: ', device)
 class CustomServer(TranscriptionServer):
     def __init__(self):
         super().__init__()
-        self.last_status = "TRANSCRIBE"
+        self.last_status = {}
         self.openai_handler = OpenAiHandler()
         '''self.test_send_t = threading.Thread(target=self.send_messages)
         self.test_send_t.setDaemon(True)
@@ -55,6 +55,7 @@ class CustomServer(TranscriptionServer):
             vad_parameters=None
         )
 
+        self.last_status[websocket] = "TRANSCRIBE"
         self.clients[websocket] = client
         self.clients_start_time[websocket] = time.time()
         while True:
@@ -64,7 +65,7 @@ class CustomServer(TranscriptionServer):
                 try:
                     message_data = json.loads(frame_data)
                     status = message_data['status']
-                    if self.last_status != status:
+                    if self.last_status[websocket] != status:
                         if status == "ANALYZE":
                             print('Parameters: ', message_data)
                             detected_speech = self.clients[websocket].get_full_text(
@@ -113,7 +114,7 @@ class CustomServer(TranscriptionServer):
                         else:
                             print(message_data['status'])
                             self.clients[websocket].reset_text()
-                        self.last_status = status
+                        self.last_status[websocket] = status
 
                     is_message = True
                 except Exception as e:

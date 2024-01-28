@@ -43,4 +43,8 @@ RUN python download-medium.py
 COPY requirements.txt requirements.txt 
 RUN python -m pip install -r requirements.txt
 
+COPY src
+
+CMD ["python", "server_for_unity.py"]
+
 
