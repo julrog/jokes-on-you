@@ -107,7 +107,6 @@ public class GameController : MonoBehaviour
     public void OpenAIResponse(OpenAiResponse response) {
         Debug.Log("incoming api response");
         // OpenAiResponse response = new OpenAiResponse();
-        Debug.Log("this.round" + this.round + this.maxRound);
         
         this.round = this.round + 1;
         this.DisplayComments(response.sentences);
@@ -131,6 +130,7 @@ public class GameController : MonoBehaviour
         this.roundText.text = "" + (this.round + 1);
         this.feelingText.text = "Aliens sind: " + response.feeling;
 
+        Debug.Log("this.round" + this.round + this.maxRound);
         if (this.round >= this.maxRound) {
             Debug.Log("Close and finish");
             var aliensNotOnStage = this.aliens.Where(alienController => alienController.onStage);
