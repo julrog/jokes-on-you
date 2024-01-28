@@ -36,6 +36,8 @@ public class GameStruct : MonoBehaviour
 
   public CriteriaStruct currentCrits;
 
+  public string lastFeeling;
+
   void Start()
   {
 
@@ -43,6 +45,7 @@ public class GameStruct : MonoBehaviour
 
   public CriteriaStruct selectNewGameCriteria()
   {
+    this.lastFeeling = this.currentCrits.feeling;
     int l = crits.Length - 1;
     Debug.Log("crits.Length" + crits.Length);
     if (this.crits.Length > 0)

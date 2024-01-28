@@ -132,8 +132,8 @@ public class GameController : MonoBehaviour
         gameStruct.selectNewGameCriteria();
         
         this.scoreText.text = "" + (this.currentScore / this.round);
-        this.roundText.text = "" + (this.round + 1);
-        this.feelingText.text = "Deine Geschichte war:" + response.feeling;
+        this.roundText.text = "" + this.round;
+        this.feelingText.text = "Deine Geschichte aus Runde:" + this.round + " löste aus: " + response.feeling + " anstelle: " + gameStruct.lastFeeling;
 
         Debug.Log("this.round" + this.round + this.maxRound);
         if (this.round >= this.maxRound && (this.currentScore / this.round >= 7)) {
