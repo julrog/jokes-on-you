@@ -133,6 +133,14 @@ public class GameController : MonoBehaviour
 
         if (this.round > this.maxRound) {
             Debug.Log("Close and finish");
+            var aliensNotOnStage = this.aliens.Where(alienController => alienController.onStage);
+            if (aliensNotOnStage.Any()) {
+                int randomIndex = Random.Range(1, aliensNotOnStage.Count());
+                for (int i = 0; i < randomIndex; i++) {
+                    AlienController alien = aliensNotOnStage.ElementAt(i);
+                    alien.partyHard();
+                }
+            }
             Invoke("closeCurtains", 5f);
         }
     }
