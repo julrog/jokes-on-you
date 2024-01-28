@@ -55,7 +55,7 @@ public class AlienController : MonoBehaviour
   public void displayComment(string text) {
     alienComment.gameObject.SetActive(true);
     alienComment.text = text;
-    InvokeRepeating("DelayedAction", 5f, Mathf.Infinity);
+    InvokeRepeating("DelayedAction", 8f, Mathf.Infinity);
   }
 
   public void DelayedAction()
