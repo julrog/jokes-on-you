@@ -141,7 +141,9 @@ public class GameController : MonoBehaviour
                     alien.partyHard();
                 }
             }
-            Invoke("closeCurtains", 5f);
+        }
+        if (this.round >= this.maxRound) {
+          Invoke("closeCurtains", 5f);
         }
     }
 
