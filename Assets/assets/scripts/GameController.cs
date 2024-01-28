@@ -131,12 +131,11 @@ public class GameController : MonoBehaviour
         this.roundText.text = "" + (this.round + 1);
         this.feelingText.text = "Aliens sind: " + response.feeling;
 
-        if (this.round > this.maxRound) {
+        if (this.round >= this.maxRound) {
             Debug.Log("Close and finish");
             var aliensNotOnStage = this.aliens.Where(alienController => alienController.onStage);
             if (aliensNotOnStage.Any()) {
-                int randomIndex = Random.Range(1, aliensNotOnStage.Count());
-                for (int i = 0; i < randomIndex; i++) {
+                for (int i = 0; i < aliensNotOnStage.Count(); i++) {
                     AlienController alien = aliensNotOnStage.ElementAt(i);
                     alien.partyHard();
                 }
@@ -151,7 +150,7 @@ public class GameController : MonoBehaviour
 
     public void callOpenAIResponse() {
         OpenAiResponse res = new OpenAiResponse();
-        res.score = -1;
+        res.score = 7;
         res.feeling = "Glücklich";
         res.sentences = new string[] {"WAS?", "Diggi"};
         this.OpenAIResponse(res);
