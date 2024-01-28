@@ -102,16 +102,20 @@ public class GameController : MonoBehaviour
     public void OpenAIResponse(OpenAiResponse response) {
         Debug.Log("incoming api response");
         // OpenAiResponse response = new OpenAiResponse();
-        this.round = this.round + 1;
         Debug.Log("this.round" + this.round + this.maxRound);
         
+        this.round = this.round + 1;
         this.DisplayComments(response.sentences);
 
         Debug.Log("this.currentScore:" + this.currentScore + "response.score:" + response.score + "this.round:" + this.round);
-        if (response.score >= (this.currentScore / this.round)) {
+        if (this.round == 0) {
             this.GoodAIResponse(response.sentences);
         } else {
-            this.BadAIResponse(response.sentences);
+            if (response.score >= (this.currentScore / this.round)) {
+                this.GoodAIResponse(response.sentences);
+            } else {
+                this.BadAIResponse(response.sentences);
+            }
         }
 
         this.currentScore += response.score;
@@ -147,7 +151,7 @@ public class GameController : MonoBehaviour
             int randomIndex = aliensNotOnStage.Count();
             for (int i = 0; i < randomIndex; i++) {
                 int canITellYouSomething = Random.Range(0, 4);
-                if (canITellYouSomething >= 3) {
+                if (canITellYouSomething >= 2) {
                     AlienController alien = aliensNotOnStage.ElementAt(i);
                     int randomSentence = Random.Range(1, msges.Length);
                     string msg = msges[randomSentence];
@@ -174,14 +178,8 @@ public class GameController : MonoBehaviour
         if (aliensNotOnStage.Any()) {
             int randomIndex = Random.Range(1, aliensNotOnStage.Count());
             for (int i = 0; i < randomIndex; i++) {
-                int canITellYouSomething = Random.Range(0, 4);
-                if (canITellYouSomething >= 3) {
-                    AlienController alien = aliensNotOnStage.ElementAt(i);
-                    alien.alienIdle();
-                    // int randomSentence = Random.Range(1, msges.Length);
-                    // string msg = msges[randomSentence];
-                    // alien.displayComment(msg);
-                }
+                AlienController alien = aliensNotOnStage.ElementAt(i);
+                alien.alienIdle();
             }
         }
     }
