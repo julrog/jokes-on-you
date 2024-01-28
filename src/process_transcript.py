@@ -117,7 +117,6 @@ class SpeechProcessor(ServeClient):
             try:
                 input_sample = input_bytes.copy()
 
-                print('receive audio')
                 # whisper transcribe with prompt
                 result, info = self.transcriber.transcribe(
                     input_sample,
