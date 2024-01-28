@@ -39,7 +39,7 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.startGame();
+        // this.startGame();
         gameStruct.selectNewGameCriteria();
         // this.makeAliensThink();
     }
