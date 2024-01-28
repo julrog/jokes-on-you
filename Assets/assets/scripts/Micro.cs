@@ -23,8 +23,10 @@ public class Micro : MonoBehaviour
 
     void OnMouseExit()
     {
-        //The mouse is no longer hovering over the GameObject so output this message each frame
-        // Debug.Log("Mouse is no longer on GameObject.");
+        this.quitRound();
+    }
+
+    public void quitRound() {
         LeanTween.cancel(currentTweenId);
         this.currentTweenId = LeanTween.move(this.gameObject, new Vector3(6 , -5, 6), .3f).setOnComplete( ()=> { Debug.Log("finish down"); this.game.endRound(); } ).id;
         isOver = false;

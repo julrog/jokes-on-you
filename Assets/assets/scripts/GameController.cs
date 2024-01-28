@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
 {
     public CurtainAnimator curtainAnimator;
     public WebSocketMicroController micController;
+    public Micro microAnimator;
     public GameObject notePlane;
 
     public GameStruct gameStruct;
@@ -77,10 +78,7 @@ public class GameController : MonoBehaviour
             Debug.Log("finish trough timeout");
             // send and wait for response.
             count = 0;
-        }
-
-        if (oldTalkState && !canTalk) {
-            this.endRound();
+            microAnimator.quitRound();
         }
     }
 

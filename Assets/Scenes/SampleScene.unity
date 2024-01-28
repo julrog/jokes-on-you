@@ -4945,6 +4945,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   curtainAnimator: {fileID: 1846580029}
   micController: {fileID: 1105483582}
+  microAnimator: {fileID: 283372596}
   notePlane: {fileID: 1982514361}
   gameStruct: {fileID: 1506319626}
   round: 0
@@ -6288,7 +6289,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1846580029
 MonoBehaviour:
   m_ObjectHideFlags: 0
