@@ -50,7 +50,7 @@ class CustomServer(TranscriptionServer):
             language='de',
             task='transcribe',
             client_uid=cid,
-            model_size="small",
+            model_size="medium",
             initial_prompt=None,
             vad_parameters=None
         )
@@ -71,8 +71,7 @@ class CustomServer(TranscriptionServer):
                             detected_speech = self.clients[websocket].get_full_text(
                             )
                             print('Detected Speech: ', detected_speech)                            
-                            feels = self.openai_handler.run(detected_speech, 'feels'
-                                                            )
+                                                                                        
                             good_words = GOOD_WORDS
                             if 'goodwords' in message_data:
                                 good_words = message_data['goodwords'].split(
@@ -82,7 +81,9 @@ class CustomServer(TranscriptionServer):
                                 bad_words = message_data['badwords'].split(
                                     ';')
                             score = self.openai_handler.judge(
-                                detected_speech, good_words, bad_words)
+                                detected_speech, good_words, bad_words, 'judge-sense')
+                            
+                            feels = self.openai_handler.run(detected_speech, 'feels-more')
 
                             final_response = {}
                             try:
@@ -94,8 +95,12 @@ class CustomServer(TranscriptionServer):
                                 final_response['feeling'] = feels_obj.get(
                                     'gefühl')
 
-                                final_response['sentences'] = feels_obj.get(
-                                    'sätze')
+                                if 'sätze' in feels_obj:
+                                    final_response['sentences'] = feels_obj.get(
+                                        'sätze')
+                                elif 'ausrufe' in feels_obj:
+                                    final_response['sentences'] = feels_obj.get(
+                                        'ausrufe')
 
                             except Exception as e:
                                 pass
@@ -121,6 +126,7 @@ class CustomServer(TranscriptionServer):
                     pass
 
                 if not is_message:
+                    print('receive audio')
                     frame_np = np.frombuffer(frame_data, dtype=np.float32)
 
                     self.clients[websocket].add_frames(frame_np)
