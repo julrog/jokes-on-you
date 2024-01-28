@@ -7142,11 +7142,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Lese und erfinde dir eine Geschichte aus deinem Spickzeddl. Versuch mit
-    deiner Geschichte emotionen bei den Aliens auszul\xF6sen. Benutze dabei die Gr\xFCnen
-    Worte und meide die Roten. Bestehe 3 Runde mit einem Score von mind. 7 Punkten.
-    Jedes getroffene Wort = 1Pkt, Jedes Misslungene Wort - 2Pkt. Getroffene Stimmung
-    = 5Pkt. Die Worte werden nach sinnigkeit gepr\xFCft. Also obacht beim aufz\xE4hlen!"
+  m_text: "Lese und erfinde dir eine Geschichte. Versuch mit deiner Geschichte die
+    geforderte Emotion bei den Aliens auszul\xF6sen, das gibt besonders viele Punkte.
+    Benutze dabei Themen die zu den gruenen Worten passen und meide die Roten. Die
+    Aliens bewerten dich jede Runde mit maximal 10 Punkten. Bestehe 3 Runde mit einem
+    Score von mind. 7 Punkten. Gruene Worte geben Pluspunkte und Rote Minuspunkte
+    und es gibt Abzuege wenn deine Geschichte keinen Sinn ergibt."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5a6c360649f6e46198830fbf64f17d9c, type: 2}
   m_sharedMaterial: {fileID: -5999176526815613961, guid: 5a6c360649f6e46198830fbf64f17d9c, type: 2}

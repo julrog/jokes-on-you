@@ -8,23 +8,23 @@ using NativeWebSocket;
 [System.Serializable]
 public class Transcription
 {
-    public string current;
-    public string finished;
+  public string current;
+  public string finished;
 }
 
 [System.Serializable]
 public class OpenAiResponse
 {
-    public int score;
-    public string feeling;
-    public string[] sentences;
+  public int score;
+  public string feeling;
+  public string[] sentences;
 }
 
 [System.Serializable]
 public class Response
 {
-    public Transcription transcription;
-    public OpenAiResponse openAiResponse;
+  public Transcription transcription;
+  public OpenAiResponse openAiResponse;
 }
 
 public class WebSocketController : MonoBehaviour
@@ -37,7 +37,7 @@ public class WebSocketController : MonoBehaviour
   // Start is called before the first frame update
   async void Start()
   {
-    websocket = new WebSocket("ws://172.20.10.7:9000");
+    websocket = new WebSocket("ws://localhost:9000");
 
     websocket.OnOpen += () =>
     {
@@ -66,20 +66,26 @@ public class WebSocketController : MonoBehaviour
       Debug.Log("OnMessage! " + message);
       Response playerData = JsonUtility.FromJson<Response>(message);
       Debug.Log("incoming mesages" + message);
-      if (playerData != null) {
+      if (playerData != null)
+      {
         Transcription trans = playerData.transcription;
         OpenAiResponse aiRes = playerData.openAiResponse;
-        if (trans.finished != "") {
+        if (trans.finished != "")
+        {
           game.saveToStaticText(trans.finished);
         }
-        if (trans.current != "" && this.game.canTalk) {
+        if (trans.current != "" && this.game.canTalk)
+        {
           game.setSpeechText(trans.current);
         }
-        if (aiRes.feeling != "") {
+        if (aiRes.feeling != "")
+        {
           Debug.Log("OpenAIRes beeing triggered" + aiRes.feeling);
           game.OpenAIResponse(aiRes);
         }
-      } else {
+      }
+      else
+      {
         Debug.Log("asdasdasd" + message);
       }
     };
@@ -94,9 +100,9 @@ public class WebSocketController : MonoBehaviour
 
   void Update()
   {
-    #if !UNITY_WEBGL || UNITY_EDITOR
-      websocket.DispatchMessageQueue();
-    #endif
+#if !UNITY_WEBGL || UNITY_EDITOR
+    websocket.DispatchMessageQueue();
+#endif
   }
 
   // async void SendWebSocketMessage()
@@ -111,15 +117,17 @@ public class WebSocketController : MonoBehaviour
   //   }
   // }
 
-  public async void SendTranscriptionEnd() {
+  public async void SendTranscriptionEnd()
+  {
     CriteriaStruct gs = game.gameStruct.currentCrits;
     Debug.Log("GS:" + gs.feeling);
     string combinedString = string.Join(";", gs.noGos);
     string combinedString1 = string.Join(";", gs.toUse);
-    await websocket.SendText("{\"status\": \"ANALYZE\", \"feeling\": \""+gs.feeling+"\", \"badwords\": \""+combinedString+"\", \"goodwords\": \""+combinedString1+"\"}");
+    await websocket.SendText("{\"status\": \"ANALYZE\", \"feeling\": \"" + gs.feeling + "\", \"badwords\": \"" + combinedString + "\", \"goodwords\": \"" + combinedString1 + "\"}");
   }
 
-  public async void StartSendTranscription() {
+  public async void StartSendTranscription()
+  {
     await websocket.SendText("{\"status\": \"TRANSCRIBE\"}");
   }
 
@@ -128,9 +136,11 @@ public class WebSocketController : MonoBehaviour
     await websocket.Close();
   }
 
-  public async void SendChunk(byte[] data) {
+  public async void SendChunk(byte[] data)
+  {
     // Sending bytes
-    if (this.isConnected/* && this.game.canTalk*/) {
+    if (this.isConnected/* && this.game.canTalk*/)
+    {
       await websocket.Send(data);
     }
   }
