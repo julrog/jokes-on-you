@@ -6,3 +6,4 @@ GGJ2024
 * länger Sprechblase anzeigen
 * Micro Timer fixen
 * Alten Text löschen
+* Score beeinflusst Reaktion
