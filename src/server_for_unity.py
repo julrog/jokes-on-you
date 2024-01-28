@@ -1,4 +1,5 @@
 import json
+import os
 import threading
 import time
 import uuid
@@ -12,9 +13,12 @@ from process_transcript import SpeechProcessor
 import torch
 
 from openai_api import GOOD_WORDS, BAD_WORDS, OpenAiHandler
+from dotenv import load_dotenv
+
+load_dotenv()
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
-print('DEVICE: ', device)
+print('DEVICE: ', device, 'MODEL_SIZE: ', os.environ.get("MODEL_SIZE"))
 
 
 class CustomServer(TranscriptionServer):
@@ -44,13 +48,20 @@ class CustomServer(TranscriptionServer):
         except Exception as e:
             pass
 
+        model_size = "medium"
+
+        env_model_size = os.environ.get("MODEL_SIZE")
+
+        if env_model_size and env_model_size in ['small', 'medium']:
+            model_size = env_model_size
+
         client = SpeechProcessor(
             websocket,
             multilingual=True,
             language='de',
             task='transcribe',
             client_uid=cid,
-            model_size="medium",
+            model_size=model_size,
             initial_prompt=None,
             vad_parameters=None
         )
