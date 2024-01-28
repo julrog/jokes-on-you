@@ -14,9 +14,13 @@ public class GameController : MonoBehaviour
 
     public GameStruct gameStruct;
 
-    public int round;
+    public int round = 0;
     public int maxRound;
     public int currentScore;
+
+    public TMP_Text roundText;
+    public TMP_Text scoreText;
+    public TMP_Text feelingText;
 
     public bool canTalk = false;
 
@@ -32,6 +36,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
         // this.startGame();
+        gameStruct.selectNewGameCriteria();
     }
 
     private int count = 0;
@@ -64,7 +69,6 @@ public class GameController : MonoBehaviour
         if (count == ownTimer && canTalk) {
             Debug.Log("finish trough timeout");
             // send and wait for response.
-            canTalk = false;
             count = 0;
         }
 
@@ -95,24 +99,88 @@ public class GameController : MonoBehaviour
         this.speechText.text = this.finishedText;
     }
 
-    public void OpenAIResponse() {
-        this.round += 1;
-    }
+    public void OpenAIResponse(OpenAiResponse response) {
+        Debug.Log("incoming api response");
+        // OpenAiResponse response = new OpenAiResponse();
+        Debug.Log("this.round" + this.round + this.maxRound);
+        
+        this.round = this.round + 1;
+        this.DisplayComments(response.sentences);
 
-    public async void GoodAIResponse() {
-        Debug.Log("will start good ai respo.");
-        var aliensNotOnStage = this.aliens.Where(alienController => !alienController.onStage);
-        foreach (var alien in aliensNotOnStage)
-        {
-            alien.moveAlien();
+        Debug.Log("this.currentScore:" + this.currentScore + "response.score:" + response.score + "this.round:" + this.round);
+        if (this.round == 0) {
+            this.GoodAIResponse(response.sentences);
+        } else {
+            if (response.score >= (this.currentScore / this.round)) {
+                this.GoodAIResponse(response.sentences);
+            } else {
+                this.BadAIResponse(response.sentences);
+            }
+        }
+
+        this.currentScore += response.score;
+        
+        gameStruct.selectNewGameCriteria();
+        
+        this.scoreText.text = "" + (this.currentScore / this.round);
+        this.roundText.text = "" + (this.round + 1);
+        this.feelingText.text = "Aliens sind: " + response.feeling;
+
+        if (this.round > this.maxRound) {
+            Debug.Log("Close and finish");
+            Invoke("closeCurtains", 5f);
         }
     }
 
-    public async void BadAIResponse() {
+    void closeCurtains() {
+        curtainAnimator.closeCurtains();
+    }
+
+    public void callOpenAIResponse() {
+        OpenAiResponse res = new OpenAiResponse();
+        res.score = -1;
+        res.feeling = "Glücklich";
+        res.sentences = new string[] {"WAS?", "Diggi"};
+        this.OpenAIResponse(res);
+    }
+
+    async void DisplayComments(string[] msges) {
+        string txtToDisplay = msges[Random.Range(0, msges.Length - 1)];
         var aliensNotOnStage = this.aliens.Where(alienController => alienController.onStage);
-        foreach (var alien in aliensNotOnStage)
-        {
-            alien.alienIdle();
+        if (aliensNotOnStage.Any()) {
+            int randomIndex = aliensNotOnStage.Count();
+            for (int i = 0; i < randomIndex; i++) {
+                int canITellYouSomething = Random.Range(0, 4);
+                if (canITellYouSomething >= 2) {
+                    AlienController alien = aliensNotOnStage.ElementAt(i);
+                    int randomSentence = Random.Range(1, msges.Length);
+                    string msg = msges[randomSentence];
+                    alien.displayComment(msg);
+                }
+            }
+        }
+    }
+
+    public async void GoodAIResponse(string[] msges) {
+        Debug.Log("will start good ai respo.");
+        var aliensNotOnStage = this.aliens.Where(alienController => !alienController.onStage);
+        if (aliensNotOnStage.Any()) {
+            int randomIndex = Random.Range(1, aliensNotOnStage.Count());
+            for (int i = 0; i < randomIndex; i++) {
+                AlienController alien = aliensNotOnStage.ElementAt(i);
+                alien.moveAlien();
+            }
+        }
+    }
+
+    public async void BadAIResponse(string[] msges) {
+        var aliensNotOnStage = this.aliens.Where(alienController => alienController.onStage);
+        if (aliensNotOnStage.Any()) {
+            int randomIndex = Random.Range(1, aliensNotOnStage.Count());
+            for (int i = 0; i < randomIndex; i++) {
+                AlienController alien = aliensNotOnStage.ElementAt(i);
+                alien.alienIdle();
+            }
         }
     }
 }

@@ -39,9 +39,14 @@ public class WebSocketMicroController : MonoBehaviour
     }
 
     public void closeMic() {
+      Invoke("invoke", 5f);
+      Microphone.End(null);
+    }
+
+    void invoke() {
+      sc.game.canTalk = false;
       sc.SendTranscriptionEnd();
       StopCoroutine(myCoroutine);
-      Microphone.End(null);
     }
  
     void OnDestroy(){
@@ -76,7 +81,7 @@ public class WebSocketMicroController : MonoBehaviour
             byte[] byteData = ConvertFloatArrayToByteArray(data);
 
             // Hier können Sie den Chunk senden oder anderweitig verwenden
-           Debug.Log("Sending chunk of size: " + byteData.Length + " bytes");
+            // Debug.Log("Sending chunk of size: " + byteData.Length + " bytes");
             // Debug.Log("send data");
             sc.SendChunk(byteData);
 

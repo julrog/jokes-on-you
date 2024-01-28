@@ -5,6 +5,7 @@ using TMPro;
 
 public class AlienController : MonoBehaviour
 {
+  public Material materialToColor;
   public TMP_Text alienComment;
   public GameController alien;
   public bool idle;
@@ -12,11 +13,24 @@ public class AlienController : MonoBehaviour
   public bool onStage = false;
   public void moveAlien()
   {
+    Invoke("makeAnimation", 0.1f);
+    Invoke("makeAnimation", 0.2f);
+    Invoke("makeAnimation", 0.3f);
+    Invoke("makeAnimation", 0.4f);
+    Invoke("makeAnimation", 0.5f);
+    Invoke("makeAnimation", 0.6f);
+    Invoke("makeAnimation", 0.7f);
+    Invoke("makeAnimation", 0.8f);
+    Invoke("makeAnimation", 0.9f);
+  }
+
+  public void makeAnimation() {
     float randomX = Random.Range(-8f, 8f);
     float randomY = Random.Range(-3f, 1f);
     LeanTween.cancel(currentTweenId);
     this.currentTweenId = LeanTween.move(gameObject, new Vector3(randomX , randomY, 8), .3f).setOnComplete( ()=> { this.onStage = true; } ).id;
-    // LeanTween.move(notePlane, new Vector3(-5, 4, -3), 1);
+
+    // materialToColor.color = Color.red;
   }
 
   public void alienIdle()

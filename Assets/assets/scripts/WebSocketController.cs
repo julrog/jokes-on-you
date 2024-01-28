@@ -15,8 +15,9 @@ public class Transcription
 [System.Serializable]
 public class OpenAiResponse
 {
-    // public string current;
-    // public string finished;
+    public int score;
+    public string feeling;
+    public string[] sentences;
 }
 
 [System.Serializable]
@@ -63,16 +64,23 @@ public class WebSocketController : MonoBehaviour
       var message = System.Text.Encoding.UTF8.GetString(bytes);
       Debug.Log("OnMessage! " + message);
       Response playerData = JsonUtility.FromJson<Response>(message);
-      Debug.Log("incoming mesagesiuh" + playerData.transcription);
-      // if (playerData.transcription) {
+      Debug.Log("incoming mesages" + message);
+      if (playerData != null) {
         Transcription trans = playerData.transcription;
+        OpenAiResponse aiRes = playerData.openAiResponse;
         if (trans.finished != "") {
           game.saveToStaticText(trans.finished);
         }
         if (trans.current != "" && this.game.canTalk) {
           game.setSpeechText(trans.current);
         }
-      // }
+        if (aiRes.feeling != "") {
+          Debug.Log("OpenAIRes beeing triggered" + aiRes.feeling);
+          game.OpenAIResponse(aiRes);
+        }
+      } else {
+        Debug.Log("asdasdasd" + message);
+      }
     };
 
     // Keep sending messages at every 0.3s
@@ -103,7 +111,11 @@ public class WebSocketController : MonoBehaviour
   // }
 
   public async void SendTranscriptionEnd() {
-    await websocket.SendText("{\"status\": \"ANALYZE\"}");
+    CriteriaStruct gs = game.gameStruct.currentCrits;
+    Debug.Log("GS:" + gs.feeling);
+    string combinedString = string.Join(";", gs.noGos);
+    string combinedString1 = string.Join(";", gs.toUse);
+    await websocket.SendText("{\"status\": \"ANALYZE\", \"feeling\": \""+gs.feeling+"\", \"badwords\": \""+combinedString+"\", \"goodwords\": \""+combinedString1+"\"}");
   }
 
   public async void StartSendTranscription() {
