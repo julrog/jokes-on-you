@@ -3222,6 +3222,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sc: {fileID: 1105483583}
+  isFinished: 1
 --- !u!114 &1105483583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4265,7 +4266,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4095391888950144677, guid: 0fa85018700334095ab49c57909dc6ce, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4095391888950144677, guid: 0fa85018700334095ab49c57909dc6ce, type: 3}
       propertyPath: m_LocalRotation.y
@@ -4289,7 +4290,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4855901795363227819, guid: 0fa85018700334095ab49c57909dc6ce, type: 3}
       propertyPath: m_Name
-      value: AlienGO (1)
+      value: FirstAlien
       objectReference: {fileID: 0}
     - target: {fileID: 8181271393241582086, guid: 0fa85018700334095ab49c57909dc6ce, type: 3}
       propertyPath: alien

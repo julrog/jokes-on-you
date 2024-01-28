@@ -37,6 +37,7 @@ public class GameController : MonoBehaviour
     {
         // this.startGame();
         gameStruct.selectNewGameCriteria();
+        // this.makeAliensThink();
     }
 
     private int count = 0;
@@ -80,6 +81,8 @@ public class GameController : MonoBehaviour
     }
 
     public void endRound() {
+        // make aliens think
+        this.makeAliensThink();
         // send 
         canDecreaseMicTimer = false;
         Debug.Log("Send break to websocket server and wait for response");
@@ -129,7 +132,7 @@ public class GameController : MonoBehaviour
         this.feelingText.text = "Aliens sind: " + response.feeling;
 
         Debug.Log("this.round" + this.round + this.maxRound);
-        if (this.round >= this.maxRound) {
+        if (this.round >= this.maxRound && (this.currentScore / this.round >= 7)) {
             Debug.Log("Close and finish");
             var aliensNotOnStage = this.aliens.Where(alienController => alienController.onStage);
             if (aliensNotOnStage.Any()) {
@@ -193,4 +196,16 @@ public class GameController : MonoBehaviour
             }
         }
     }
-}
+
+    void makeAliensThink() {
+      var aliensNotOnStage = this.aliens.Where(alienController => alienController.onStage);
+      if (aliensNotOnStage.Any()) {
+        for (int i = 0; i < aliensNotOnStage.Count(); i++) {
+          AlienController alien = aliensNotOnStage.ElementAt(i);
+          int randomNumber = Random.Range(0, 2);
+          bool randomBool = (randomNumber % 2 == 0);
+          alien.flip(randomBool);
+        }
+      }
+    }
+ }
