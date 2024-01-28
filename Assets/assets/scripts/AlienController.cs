@@ -65,8 +65,8 @@ public class AlienController : MonoBehaviour
     }
 
   public void partyHard() {
-    LeanTween.move(gameObject, new Vector3(transoform.position.x, transform.position.y, 8), .3f).setOnComplete( ()=> {
-      LeanTween.move(gameObject, new Vector3(transoform.position.x, transform.position.y, 8), .3f).setOnComplete( ()=> { this.partyHard() } );
+    LeanTween.move(gameObject, new Vector3(transoform.position.x, transform.position.y + 1, 8), .3f).setOnComplete( ()=> {
+      LeanTween.move(gameObject, new Vector3(transoform.position.x, transform.position.y - 1, 8), .3f).setOnComplete( ()=> { this.partyHard() } );
     } );
   }
 }
