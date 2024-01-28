@@ -64,8 +64,8 @@ public class WebSocketController : MonoBehaviour
       var message = System.Text.Encoding.UTF8.GetString(bytes);
       Debug.Log("OnMessage! " + message);
       Response playerData = JsonUtility.FromJson<Response>(message);
-      Debug.Log("incoming mesagesiuh" + playerData.transcription);
-      // if (playerData.transcription) {
+      Debug.Log("incoming mesages" + message);
+      if (playerData != null) {
         Transcription trans = playerData.transcription;
         OpenAiResponse aiRes = playerData.openAiResponse;
         if (trans.finished != "") {
@@ -78,7 +78,9 @@ public class WebSocketController : MonoBehaviour
           Debug.Log("OpenAIRes beeing triggered" + aiRes.feeling);
           game.OpenAIResponse(aiRes);
         }
-      // }
+      } else {
+        Debug.Log("asdasdasd" + message);
+      }
     };
 
     // Keep sending messages at every 0.3s

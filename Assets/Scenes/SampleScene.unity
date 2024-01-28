@@ -855,7 +855,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "2. Hover mit der Maus \xFCber das Mikrofon um mit den Aliens zu kommunizieren.
-    Erfinde eine Geschichte!"
+    Verl\xE4sst du das Mikro, Beendest du die Runde. Erfinde eine Geschichte!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b0fa48f19842b46179e21560125fc59f, type: 2}
   m_sharedMaterial: {fileID: 556009537004931424, guid: b0fa48f19842b46179e21560125fc59f, type: 2}
@@ -882,8 +882,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 6
-  m_fontSizeBase: 6
+  m_fontSize: 5
+  m_fontSizeBase: 5
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

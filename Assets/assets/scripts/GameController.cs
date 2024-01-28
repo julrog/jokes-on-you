@@ -69,7 +69,6 @@ public class GameController : MonoBehaviour
         if (count == ownTimer && canTalk) {
             Debug.Log("finish trough timeout");
             // send and wait for response.
-            canTalk = false;
             count = 0;
         }
 
@@ -107,15 +106,16 @@ public class GameController : MonoBehaviour
         this.round = this.round + 1;
         Debug.Log("this.round" + this.round + this.maxRound);
         this.scoreText.text = "" + (this.currentScore / this.round);
-        this.roundText.text = "" + this.round + 1;
+        this.roundText.text = "" + (this.round + 1);
         this.feelingText.text = "Aliens sind: " + response.feeling;
         
         this.DisplayComments(response.sentences);
 
+        Debug.Log()
         if ((this.currentScore / this.round) >= response.score) {
             this.GoodAIResponse(response.sentences);
         } else {
-            this.BadAIResponse();
+            this.BadAIResponse(response.sentences);
         }
 
         gameStruct.selectNewGameCriteria();
@@ -167,13 +167,18 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public async void BadAIResponse() {
+    public async void BadAIResponse(string[] msges) {
         var aliensNotOnStage = this.aliens.Where(alienController => alienController.onStage);
         if (aliensNotOnStage.Any()) {
             int randomIndex = Random.Range(1, aliensNotOnStage.Count());
             for (int i = 0; i < randomIndex; i++) {
-                AlienController alien = aliensNotOnStage.ElementAt(i);
-                alien.alienIdle();
+                int canITellYouSomething = Random.Range(0, 4);
+                if (canITellYouSomething >= 3) {
+                    AlienController alien = aliensNotOnStage.ElementAt(i);
+                    int randomSentence = Random.Range(1, msges.Length);
+                    string msg = msges[randomSentence];
+                    alien.displayComment(msg);
+                }
             }
         }
     }

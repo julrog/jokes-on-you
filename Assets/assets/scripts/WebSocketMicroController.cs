@@ -39,9 +39,14 @@ public class WebSocketMicroController : MonoBehaviour
     }
 
     public void closeMic() {
+      Invoke("invoke", 5f);
+      Microphone.End(null);
+    }
+
+    void invoke() {
+      sc.game.canTalk = false;
       sc.SendTranscriptionEnd();
       StopCoroutine(myCoroutine);
-      Microphone.End(null);
     }
  
     void OnDestroy(){
