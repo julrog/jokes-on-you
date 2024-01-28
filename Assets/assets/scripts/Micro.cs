@@ -30,7 +30,14 @@ public class Micro : MonoBehaviour
 
     public void quitRound() {
         LeanTween.cancel(currentTweenId);
-        this.currentTweenId = LeanTween.move(this.gameObject, new Vector3(6 , -5, 6), .3f).setOnComplete( ()=> { Debug.Log("finish down"); this.game.endRound(); } ).id;
+        this.currentTweenId = LeanTween.move(this.gameObject, new Vector3(6 , -5, 6), .3f).setOnComplete( ()=> { 
+          Debug.Log("own timer" + game.ownTimer);
+          int number = int.Parse(game.timerText.text);
+          if (number <= 14) {
+            Debug.Log("finish down");
+            this.game.endRound();
+          }
+        } ).id;
         isOver = false;
     }
 }

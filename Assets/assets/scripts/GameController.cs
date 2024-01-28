@@ -26,6 +26,7 @@ public class GameController : MonoBehaviour
     public bool canTalk = false;
 
     public int ownTimer = 15;
+    public int passedSeconds = 15;
 
     public TMP_Text timerText;
 
