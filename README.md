@@ -24,6 +24,9 @@ Erzähle den Aliens Geschichten und löse verschiedene Emotionen aus, vermeide d
 OPENAI_API_KEY=yourkey
 OPENAI_API_ORG=yourorg
 ```
+
+or copy .env.example and rename it to .env and edit the properties in there
+
 * Build and start the container:
 
 ```bash
