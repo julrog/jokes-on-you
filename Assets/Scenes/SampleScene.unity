@@ -5001,43 +5001,69 @@ MonoBehaviour:
   crits:
   - feeling: Interessiert
     noGos:
-    - Blinker
+    - Lichter
     - blitz
     - Wolken
     - horizont
     - Donner
     toUse:
-    - Krach
-    - Gewitter
-    - Himmel
-    - Wolke
-    - Erde
-  - feeling: Lachend
-    noGos:
-    - fallen
-    - "gest\xFCrzt"
-    - Witz
-    - lachen
-    - lustig
-    toUse:
-    - Dinner
-    - Pizza
-    - Unfall
-    - Mond
-    - Mond
+    - Hund
+    - hell
+    - angst
+    - theorie
+    - beichten
   - feeling: Traurig
     noGos:
-    - gestorben
-    - Hund
-    - Familie
-    - Familie
-    - Familie
+    - helfen
+    - Arzt
+    - Krank
+    - Pizza
+    - lila
     toUse:
+    - gestorben
+    - Oma
+    - Opa
     - Party
-    - Mond
-    - Mond
-    - Mond
-    - Mond
+    - lila
+  - feeling: Gelangweilt
+    noGos:
+    - langweilig
+    - interessant
+    - peinlich
+    - lieb
+    - Metal
+    toUse:
+    - Couch
+    - putzen
+    - fenrnsehen
+    - TV
+    - gelb
+  - feeling: Wuetend
+    noGos:
+    - Baseball
+    - Hund
+    - ekelhaft
+    - "gl\xFCck"
+    - Freund
+    toUse:
+    - Alien
+    - gewalt
+    - beleidigend
+    - Erde
+    - gesicht
+  - feeling: Lachend
+    noGos:
+    - Menschen
+    - Nachbarn
+    - stuhl
+    - auto
+    - spirale
+    toUse:
+    - Comedy
+    - witz
+    - gut
+    - "t\xFCte"
+    - krach
   currentCrits:
     feeling: 
     noGos: []
@@ -6005,7 +6031,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1785050060}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -3.16}
+  m_LocalPosition: {x: 0, y: 0, z: -2.99}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
