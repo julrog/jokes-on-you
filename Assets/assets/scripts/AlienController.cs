@@ -69,4 +69,32 @@ public class AlienController : MonoBehaviour
       LeanTween.move(gameObject, new Vector3(transform.position.x, transform.position.y - 1, 8), .03f).setOnComplete( ()=> { this.partyHard(); } );
     } );
   }
+
+  public float invokes = 0;
+  public void flip(bool isLeft) {
+    Debug.Log("Rotate to:" + isLeft);
+    float randomDelay = Random.Range(0f, 3f);
+    if (isLeft) {
+      Vector3 eulerAngle = transform.localRotation.eulerAngles;
+      gameObject.transform.eulerAngles = new Vector3(eulerAngle.x, eulerAngle.y - 40, eulerAngle.z);
+      Debug.Log("new Vector3(transform.rotation.y, transform.rotation.x, transform.rotation.z)" + eulerAngle);
+      LeanTween.rotateLocal(gameObject, new Vector3(eulerAngle.x, eulerAngle.y + 40, eulerAngle.z), .3f)
+      .setEase(LeanTweenType.easeInOutQuad)
+      .setRepeat(20) // Wiederhole endlos (-1) oder gib die Anzahl der Wiederholungen an
+      .setDelay(randomDelay)
+      .setLoopPingPong()
+      .setOnComplete( ()=> { LeanTween.rotateLocal(gameObject, new Vector3(eulerAngle.x, 180, eulerAngle.z), .3f); } );
+      
+    } else {
+      Vector3 eulerAngle = transform.localRotation.eulerAngles;
+      gameObject.transform.eulerAngles = new Vector3(eulerAngle.x, eulerAngle.y + 40, eulerAngle.z);
+      Debug.Log("new Vector3(transform.rotation.y, transform.rotation.x, transform.rotation.z)" + eulerAngle);
+      LeanTween.rotateLocal(gameObject, new Vector3(eulerAngle.x, eulerAngle.y - 40, eulerAngle.z), .3f)
+      .setEase(LeanTweenType.easeInOutQuad)
+      .setRepeat(20) // Wiederhole endlos (-1) oder gib die Anzahl der Wiederholungen an
+      .setDelay(randomDelay)
+      .setLoopPingPong()
+      .setOnComplete( ()=> { LeanTween.rotateLocal(gameObject, new Vector3(eulerAngle.x, 180, eulerAngle.z), .3f); } );
+    }
+  }
 }
