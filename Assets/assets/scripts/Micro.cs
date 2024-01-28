@@ -12,10 +12,11 @@ public class Micro : MonoBehaviour
     {
       //If your mouse hovers over the GameObject with the script attached, output this message
       // Debug.Log("Mouse is over GameObject.");
-      if (!isOver) {
+      if (!isOver && micController.isFinished) {
         isOver = true;
+        this.game.canDecreaseMicTimer = true;
         LeanTween.cancel(currentTweenId);
-        this.currentTweenId = LeanTween.move(this.gameObject, new Vector3(6 , -1, 6), .3f).setOnComplete( ()=> { Debug.Log("finished"); this.game.canTalk = true; this.micController.openMic(); this.game.canDecreaseMicTimer = true; } ).id;
+        this.currentTweenId = LeanTween.move(this.gameObject, new Vector3(6 , -1, 6), .3f).setOnComplete( ()=> { Debug.Log("finished"); this.game.canTalk = true; this.micController.openMic(); } ).id;
         // LeanTween.move(notePlane, new Vector3(-5, 4, -3), 1);
       }
     }

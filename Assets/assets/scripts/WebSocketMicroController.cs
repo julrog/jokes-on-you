@@ -16,6 +16,8 @@ public class WebSocketMicroController : MonoBehaviour
     private const int chunkSize = 1024;
 
     private Coroutine myCoroutine;
+
+    public bool isFinished = true;
  
     // Use this for initialization
     void Start()
@@ -25,6 +27,7 @@ public class WebSocketMicroController : MonoBehaviour
     public void openMic() {
         Debug.Log("Mic will open");
         sc.StartSendTranscription();
+        isFinished = false;
         // Beginnen Sie mit der Aufnahme vom Mikrofon
         AudioClip microphoneClip = Microphone.Start(null, true, 60, FREQUENCY);
         
@@ -47,6 +50,7 @@ public class WebSocketMicroController : MonoBehaviour
       sc.game.canTalk = false;
       sc.SendTranscriptionEnd();
       StopCoroutine(myCoroutine);
+      isFinished = true;
     }
  
     void OnDestroy(){

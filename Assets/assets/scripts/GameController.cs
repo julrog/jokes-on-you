@@ -50,7 +50,7 @@ public class GameController : MonoBehaviour
     {
         // Debug.Log("canTalk" + this.canTalk);
         bool oldTalkState = canTalk;
-        if (canTalk) {
+        if (canTalk && canDecreaseMicTimer) {
             // Aktualisieren Sie den Timer
             timer += Time.deltaTime;
 
@@ -62,9 +62,7 @@ public class GameController : MonoBehaviour
 
                 // Hier können Sie die Zählung verwenden oder anderweitig verarbeiten
                 Debug.Log("Count: " + count);
-                if (canDecreaseMicTimer) {
-                    timerText.text = ""+(ownTimer - count);
-                }
+                timerText.text = ""+(ownTimer - count);
                 // Setzen Sie den Timer zurück
                 timer = 0f;
             }
