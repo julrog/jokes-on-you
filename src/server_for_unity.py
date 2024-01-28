@@ -70,8 +70,8 @@ class CustomServer(TranscriptionServer):
                             print('Parameters: ', message_data)
                             detected_speech = self.clients[websocket].get_full_text(
                             )
-                            print('Detected Speech: ', detected_speech)                            
-                                                                                        
+                            print('Detected Speech: ', detected_speech)
+
                             good_words = GOOD_WORDS
                             if 'goodwords' in message_data:
                                 good_words = message_data['goodwords'].split(
@@ -82,8 +82,12 @@ class CustomServer(TranscriptionServer):
                                     ';')
                             score = self.openai_handler.judge(
                                 detected_speech, good_words, bad_words, 'judge-sense')
-                            
-                            feels = self.openai_handler.run(detected_speech, 'feels-more')
+
+                            mood = ''
+                            if score == 0:
+                                mood = "Du bist eher skeptisch gegenüber dem Menschen eingestellt."
+                            feels = self.openai_handler.run(
+                                detected_speech, 'feels-more', mood)
 
                             final_response = {}
                             try:
@@ -126,7 +130,6 @@ class CustomServer(TranscriptionServer):
                     pass
 
                 if not is_message:
-                    print('receive audio')
                     frame_np = np.frombuffer(frame_data, dtype=np.float32)
 
                     self.clients[websocket].add_frames(frame_np)
