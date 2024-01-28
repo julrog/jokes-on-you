@@ -1,7 +1,7 @@
 # Story Teller
 
 Tell the aliens stories and trigger different emotions, avoiding words and topics that the aliens don't like and instead using topics that they do like.
-In-game language is German only for now
+In-game language is German only for now.
 
 Deutsch:
 Erzähle den Aliens Geschichten und löse verschiedene Emotionen aus, vermeide dabei Worte und Themen, die die Aliens nicht mögen und nutze stattdessen Themen, die sie mögen.
@@ -37,5 +37,11 @@ docker build . -t jokes-on-you -f docker/Dockerfile
 docker run -it --gpus all -p 9000:9000 --env-file .env jokes-on-you:latest 
 ```
 
-### Start the Game via Unity
+* The audio transcription works best with a NVIDIA-GPU on Windows
 
+## Start the Game via Unity
+
+* Have the server running locally.
+* Load the build game from https://globalgamejam.org/games/2024/storyteller-8 or start the Unity project.
+* The curtains in game open when the game can successfully connect to the server
+* Enjoy!
