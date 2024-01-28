@@ -162,9 +162,9 @@ public class GameController : MonoBehaviour
 
     public void callOpenAIResponse() {
         OpenAiResponse res = new OpenAiResponse();
-        res.score = 6;
+        res.score = 7;
         res.feeling = "Glücklich";
-        res.sentences = new string[] {"WAS?", "Diggi"};
+        res.sentences = new string[] {"WAS?", "Diggi", "GEIL", "du siehst gut aus!", "Heirate mich!", "PARTY HARD :O"};
         this.OpenAIResponse(res);
     }
 

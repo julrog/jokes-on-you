@@ -79,7 +79,6 @@ public class AlienController : MonoBehaviour
       gameObject.transform.eulerAngles = new Vector3(eulerAngle.x, eulerAngle.y - 40, eulerAngle.z);
       Debug.Log("new Vector3(transform.rotation.y, transform.rotation.x, transform.rotation.z)" + eulerAngle);
       LeanTween.rotateLocal(gameObject, new Vector3(eulerAngle.x, eulerAngle.y + 40, eulerAngle.z), .3f)
-      .setOnStart(() => {})
       .setEase(LeanTweenType.easeInOutQuad)
       .setRepeat(20) // Wiederhole endlos (-1) oder gib die Anzahl der Wiederholungen an
       .setDelay(randomDelay)
@@ -91,7 +90,6 @@ public class AlienController : MonoBehaviour
       gameObject.transform.eulerAngles = new Vector3(eulerAngle.x, eulerAngle.y + 40, eulerAngle.z);
       Debug.Log("new Vector3(transform.rotation.y, transform.rotation.x, transform.rotation.z)" + eulerAngle);
       LeanTween.rotateLocal(gameObject, new Vector3(eulerAngle.x, eulerAngle.y - 40, eulerAngle.z), .3f)
-      .setOnStart(() => {})
       .setEase(LeanTweenType.easeInOutQuad)
       .setRepeat(20) // Wiederhole endlos (-1) oder gib die Anzahl der Wiederholungen an
       .setDelay(randomDelay)
