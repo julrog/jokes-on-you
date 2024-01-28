@@ -43,6 +43,8 @@ public class GameController : MonoBehaviour
     private float timer = 0f;
     private float updateInterval = 1f;
 
+    public bool canDecreaseMicTimer = true;
+
     // Update is called once per frame
     void Update()
     {
@@ -60,7 +62,9 @@ public class GameController : MonoBehaviour
 
                 // Hier können Sie die Zählung verwenden oder anderweitig verarbeiten
                 Debug.Log("Count: " + count);
-                timerText.text = ""+(ownTimer - count);
+                if (canDecreaseMicTimer) {
+                    timerText.text = ""+(ownTimer - count);
+                }
                 // Setzen Sie den Timer zurück
                 timer = 0f;
             }
@@ -79,6 +83,7 @@ public class GameController : MonoBehaviour
 
     public void endRound() {
         // send 
+        canDecreaseMicTimer = false;
         Debug.Log("Send break to websocket server and wait for response");
         this.micController.closeMic();
         count = 0;

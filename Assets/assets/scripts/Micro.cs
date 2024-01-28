@@ -15,7 +15,7 @@ public class Micro : MonoBehaviour
       if (!isOver) {
         isOver = true;
         LeanTween.cancel(currentTweenId);
-        this.currentTweenId = LeanTween.move(this.gameObject, new Vector3(6 , -1, 6), .3f).setOnComplete( ()=> { Debug.Log("finished"); this.game.canTalk = true; this.micController.openMic(); } ).id;
+        this.currentTweenId = LeanTween.move(this.gameObject, new Vector3(6 , -1, 6), .3f).setOnComplete( ()=> { Debug.Log("finished"); this.game.canTalk = true; this.micController.openMic(); this.game.canDecreaseMicTimer = true; } ).id;
         // LeanTween.move(notePlane, new Vector3(-5, 4, -3), 1);
       }
     }
