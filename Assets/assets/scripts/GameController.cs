@@ -32,10 +32,14 @@ public class GameController : MonoBehaviour
     public string finishedText;
 
     public AlienController[] aliens;
+
+    public GameObject s1;
+    public GameObject s2;
+    public GameObject sL;
     // Start is called before the first frame update
     void Start()
     {
-        // this.startGame();
+        this.startGame();
         gameStruct.selectNewGameCriteria();
         // this.makeAliensThink();
     }
@@ -134,6 +138,7 @@ public class GameController : MonoBehaviour
         Debug.Log("this.round" + this.round + this.maxRound);
         if (this.round >= this.maxRound && (this.currentScore / this.round >= 7)) {
             Debug.Log("Close and finish");
+            this.s1.SetActive(true);
             var aliensNotOnStage = this.aliens.Where(alienController => alienController.onStage);
             if (aliensNotOnStage.Any()) {
                 for (int i = 0; i < aliensNotOnStage.Count(); i++) {
@@ -143,6 +148,10 @@ public class GameController : MonoBehaviour
             }
         }
         if (this.round >= this.maxRound) {
+          if (!this.s1.activeSelf) {
+            this.s2.SetActive(true);
+          }
+          this.sL.SetActive(false);
           Invoke("closeCurtains", 5f);
         }
     }
@@ -153,7 +162,7 @@ public class GameController : MonoBehaviour
 
     public void callOpenAIResponse() {
         OpenAiResponse res = new OpenAiResponse();
-        res.score = 7;
+        res.score = 6;
         res.feeling = "Glücklich";
         res.sentences = new string[] {"WAS?", "Diggi"};
         this.OpenAIResponse(res);
