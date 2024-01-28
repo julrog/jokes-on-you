@@ -94,7 +94,7 @@ class CustomServer(TranscriptionServer):
                                 feels_obj = json.loads(feels)
                                 feels_obj = dict((k.lower(), v)
                                                  for k, v in feels_obj.items())
-                                if feels_obj['gefühl'].lower() == message_data['feeling'].lower():
+                                if feels_obj['gefühl'].lower().replace('ü', 'ue') == message_data['feeling'].lower():
                                     score += 5
                                 final_response['feeling'] = feels_obj.get(
                                     'gefühl')
