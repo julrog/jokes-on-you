@@ -18,7 +18,8 @@ using System.Linq;
 using TMPro;
 
 [System.Serializable]
-public class CriteriaStruct {
+public class CriteriaStruct
+{
   public string feeling;
   public string[] noGos;
   public string[] toUse;
@@ -37,44 +38,54 @@ public class GameStruct : MonoBehaviour
 
   void Start()
   {
-    
+
   }
 
-  public CriteriaStruct selectNewGameCriteria() {
+  public CriteriaStruct selectNewGameCriteria()
+  {
     int l = crits.Length - 1;
     Debug.Log("crits.Length" + crits.Length);
-    if (this.crits.Length > 0) {
+    if (this.crits.Length > 0)
+    {
       int n = Random.Range(0, this.crits.Length);
       this.currentCrits = this.crits[n];
       fillFE();
       return this.crits[n];
-    } else {
+    }
+    else
+    {
       CriteriaStruct c = new CriteriaStruct();
       c.feeling = "sad";
       c.noGos = new string[] { "Finger", "Tier", "Löffel", "Tee", "Buchstabe" };
-      c.toUse = new string[] {"Autobahn", "Straße", "Hund", "Kaffee", "Tütü"};
+      c.toUse = new string[] { "Autobahn", "Straße", "Hund", "Kaffee", "Tütü" };
       this.currentCrits = c;
       fillFE();
       return c;
     }
   }
 
-  public void fillFE() {
+  public void fillFE()
+  {
     feeling.text = this.currentCrits.feeling;
-    if (this.currentCrits.feeling == "Interessiert") {
-      feeling.text = "Super Interessant";
+    if (this.currentCrits.feeling == "Interessiert")
+    {
+      feeling.text = "Sei super Interessant!";
     }
-    if (this.currentCrits.feeling == "Traurig") {
-      feeling.text = "Zeit für tränen...";
+    if (this.currentCrits.feeling == "Traurig")
+    {
+      feeling.text = "Ich will Traenen sehen";
     }
-    if (this.currentCrits.feeling == "Wuetend") {
-      feeling.text = "Richtig Bösartig...";
+    if (this.currentCrits.feeling == "Wuetend")
+    {
+      feeling.text = "Mach sie richtig wuetend!";
     }
-    if (this.currentCrits.feeling == "Gelangweilt") {
-      feeling.text = "Etwas langweiliges...";
+    if (this.currentCrits.feeling == "Gelangweilt")
+    {
+      feeling.text = "Nun richtig langweilig sein.";
     }
-    if (this.currentCrits.feeling == "Lachend") {
-      feeling.text = "Lustig Lustig Lustig...";
+    if (this.currentCrits.feeling == "Lachend")
+    {
+      feeling.text = "Bring sie zum Lachen";
     }
     string combinedString = string.Join(",", this.currentCrits.noGos);
     string combinedString1 = string.Join(",", this.currentCrits.toUse);
