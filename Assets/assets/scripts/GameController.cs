@@ -119,7 +119,9 @@ public class GameController : MonoBehaviour
             this.GoodAIResponse(response.sentences);
         } else {
             if (response.score >= (this.currentScore / this.round)) {
+              if (response.score > 0) {
                 this.GoodAIResponse(response.sentences);
+              }
             } else {
                 this.BadAIResponse(response.sentences);
             }
@@ -154,13 +156,13 @@ public class GameController : MonoBehaviour
         }
     }
 
-    void closeCurtains() {
+    public void closeCurtains() {
         curtainAnimator.closeCurtains();
     }
 
     public void callOpenAIResponse() {
         OpenAiResponse res = new OpenAiResponse();
-        res.score = 7;
+        res.score = 0;
         res.feeling = "Glücklich";
         res.sentences = new string[] {"WAS?", "Diggi", "GEIL", "du siehst gut aus!", "Heirate mich!", "PARTY HARD :O"};
         this.OpenAIResponse(res);

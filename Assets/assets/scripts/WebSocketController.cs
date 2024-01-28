@@ -54,6 +54,7 @@ public class WebSocketController : MonoBehaviour
     websocket.OnClose += (e) =>
     {
       Debug.Log("Connection closed!");
+      game.closeCurtains();
     };
 
     websocket.OnMessage += (bytes) =>

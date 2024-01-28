@@ -23,7 +23,9 @@ public class Micro : MonoBehaviour
 
     void OnMouseExit()
     {
+      if (isOver) {
         this.quitRound();
+      }
     }
 
     public void quitRound() {
